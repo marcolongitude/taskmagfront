@@ -1,0 +1,160 @@
+import {
+	Box,
+	Button,
+	Card,
+	CardActions,
+	CardContent,
+	CardHeader,
+	Chip,
+	Stack,
+	Typography,
+} from "@mui/material";
+import { IResponseGetTarefasByUser } from "../../../types/tasks/types.tasks";
+import { useHooks } from "../../../hooks";
+import { useEditTarefasByUser } from "../hooks/editTarefasByUser";
+
+import { useDeleteTarefasByUser } from "../hooks/deleteTarefasByUser";
+import { useHandleFunctions } from "../hooks/functions/handleFunctions";
+import { AddTarefa } from "../components/modal/addTarefa";
+import { EditTarefa } from "../components/modal/editTarefa";
+import { DeleteTarefa } from "../components/modal/deleteTarefa";
+
+interface ListaTarefasProps {
+	tarefas: IResponseGetTarefasByUser;
+}
+
+export const ListaTarefas = ({ tarefas }: ListaTarefasProps) => {
+	const { token } = useHooks();
+
+	const {
+		openModal,
+		handleOpenModal,
+		handleCloseModal,
+		openModalEdit,
+		handleOpenModalEdit,
+		handleCloseModalEdit,
+		taskSelected,
+		handleOpenModalDelete,
+		handleCloseModalDelete,
+		openModalDelete,
+	} = useHandleFunctions();
+
+	const { submitEditTask } = useEditTarefasByUser(handleCloseModalEdit);
+	const { submitDeleteTask } = useDeleteTarefasByUser(handleCloseModalDelete);
+
+	return (
+		<Stack>
+			<Box display={"flex"} justifyContent={"end"} width={"100%"} mb={4}>
+				<Button
+					onClick={handleOpenModal}
+					color="primary"
+					variant="outlined"
+				>
+					Adicionar tarefa
+				</Button>
+			</Box>
+			<Stack gap={2} direction={"column"}>
+				{tarefas.data &&
+					tarefas.data &&
+					tarefas.data.map((tarefa) => (
+						<Box key={tarefa.idtasks}>
+							<Card>
+								<CardHeader
+									title={tarefa.title}
+									subheader={
+										<Typography
+											color="text.secondary"
+											sx={{
+												marginLeft: 2,
+												marginTop: "2px",
+											}}
+										>
+											Data:{" "}
+											{tarefa.date || "não informado"}
+										</Typography>
+									}
+								/>
+								<CardContent>
+									<Typography variant="body1" component="p">
+										{tarefa.description}
+									</Typography>
+									<Box
+										width={"100%"}
+										display={"flex"}
+										justifyContent={"end"}
+										mt={2}
+									>
+										<Chip
+											color="success"
+											component={"span"}
+											label={`Tempo: ${tarefa.time}`}
+											size="small"
+											variant="outlined"
+										/>
+									</Box>
+								</CardContent>
+								<CardActions>
+									<Box
+										width={"100%"}
+										display={"flex"}
+										justifyContent={"end"}
+										gap={2}
+									>
+										<Button
+											size="small"
+											onClick={() =>
+												handleOpenModalEdit(tarefa)
+											}
+											color="primary"
+											variant="outlined"
+										>
+											Editar tarefa
+										</Button>
+										<Button
+											size="small"
+											onClick={() =>
+												handleOpenModalDelete(tarefa)
+											}
+											color="error"
+											variant="outlined"
+										>
+											Deletar tarefa
+										</Button>
+									</Box>
+								</CardActions>
+							</Card>
+						</Box>
+					))}
+				{tarefas.data.length === 0 && (
+					<Typography variant="h6" component="p" color="secondary">
+						Nenhuma tarefa encontrada
+					</Typography>
+				)}
+			</Stack>
+			{openModal && (
+				<AddTarefa
+					openModal={openModal}
+					handleCloseModal={handleCloseModal}
+				/>
+			)}
+			{openModalEdit && (
+				<EditTarefa
+					openModal={openModalEdit}
+					handleCloseModal={handleCloseModalEdit}
+					task={taskSelected}
+					token={token}
+					submit={submitEditTask}
+				/>
+			)}
+			{openModalDelete && (
+				<DeleteTarefa
+					openModal={openModalDelete}
+					closeModal={handleCloseModalDelete}
+					task={taskSelected}
+					token={token}
+					submit={submitDeleteTask}
+				/>
+			)}
+		</Stack>
+	);
+};
