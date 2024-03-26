@@ -52,6 +52,9 @@ export const FormLoginST = ({ submit }: FormProps) => {
 					<Typography variant="body1" color="text.primary">
 						Sistemas de tarefas
 					</Typography>
+					<Link href="#" variant="body2" underline="hover">
+						Crie sua conta
+					</Link>
 				</Box>
 				<Stack
 					spacing={3}
