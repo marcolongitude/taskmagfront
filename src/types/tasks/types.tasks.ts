@@ -19,6 +19,7 @@ export type IResponseDeleteTarefasByUser = {
 		time: number;
 		users_id_users: string;
 		date: string;
+		status: "concluido" | "pendente";
 	};
 	statusCode: number;
 };
@@ -31,6 +32,7 @@ export type IResponseEditTarefasByUser = {
 		time: number;
 		users_id_users: string;
 		date: string;
+		status: "concluido" | "pendente";
 	};
 	statusCode: number;
 };
@@ -42,5 +44,6 @@ export type IResponsePostTarefasByUser = {
 		time: number;
 		userId: string;
 		date: string;
+		status: "concluido" | "pendente";
 	};
 };
