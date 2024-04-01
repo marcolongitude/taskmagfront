@@ -78,11 +78,12 @@ export const ListaTarefas = ({ tarefas }: ListaTarefasProps) => {
 									<Typography variant="body1" component="p">
 										{tarefa.description}
 									</Typography>
-									<Box
+									<Stack
 										width={"100%"}
-										display={"flex"}
-										justifyContent={"end"}
-										mt={2}
+										flexDirection={"row"}
+										justifyContent={"start"}
+										mt={8}
+										gap={1}
 									>
 										<Chip
 											color="success"
@@ -91,7 +92,14 @@ export const ListaTarefas = ({ tarefas }: ListaTarefasProps) => {
 											size="small"
 											variant="outlined"
 										/>
-									</Box>
+										<Chip
+											color="info"
+											component={"span"}
+											label={`Status: ${tarefa.status}`}
+											size="small"
+											variant="outlined"
+										/>
+									</Stack>
 								</CardContent>
 								<CardActions>
 									<Box

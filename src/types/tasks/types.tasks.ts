@@ -6,6 +6,7 @@ export type IResponseGetTarefasByUser = {
 		time: number;
 		users_id_users: string;
 		date: string;
+		status: "concluido" | "pendente";
 	}[];
 	statusCode: number;
 };
