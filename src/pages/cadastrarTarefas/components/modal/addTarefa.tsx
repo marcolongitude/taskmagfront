@@ -1,9 +1,10 @@
-import { Dialog, DialogContent, DialogTitle, IconButton } from "@mui/material";
+import { IconButton } from "@mui/material";
 import { FormAddTasks } from "../form/formAddTasks";
 import CloseIcon from "@mui/icons-material/Close";
 import { dataPostTarefaByUser } from "../../../../services/tarefas/postTarefaByUserService";
 import { usePostTarefasByUser } from "../../hooks/postTarefasByUser";
 import { useHooks } from "../../../../hooks";
+import { ModalComposition } from "../../../../components/ModalComposition";
 
 interface FormData {
 	title: string;
@@ -18,7 +19,6 @@ interface Props {
 }
 
 export const AddTarefa = ({ openModal, handleCloseModal }: Props) => {
-	console.log("passou add tarefa");
 	const { token, userData } = useHooks();
 
 	const { submitAddTask } = usePostTarefasByUser(handleCloseModal);
@@ -39,15 +39,15 @@ export const AddTarefa = ({ openModal, handleCloseModal }: Props) => {
 	};
 
 	return (
-		<Dialog
-			maxWidth="lg"
+		<ModalComposition.Root
+			maxWidth="md"
 			open={openModal}
 			onClose={handleCloseModal}
-			aria-labelledby="customized-dialog-title"
 		>
-			<DialogTitle sx={{ m: 0, p: 2 }} id="customized-dialog-title">
-				Adicionar tarefa
-			</DialogTitle>
+			<ModalComposition.Header
+				title="Adicionar tarefa"
+				onClose={handleCloseModal}
+			/>
 			<IconButton
 				aria-label="close"
 				onClick={handleCloseModal}
@@ -60,9 +60,9 @@ export const AddTarefa = ({ openModal, handleCloseModal }: Props) => {
 			>
 				<CloseIcon />
 			</IconButton>
-			<DialogContent dividers>
+			<ModalComposition.Body>
 				<FormAddTasks submit={submit} />
-			</DialogContent>
-		</Dialog>
+			</ModalComposition.Body>
+		</ModalComposition.Root>
 	);
 };

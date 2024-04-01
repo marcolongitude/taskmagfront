@@ -1,4 +1,4 @@
-import { Dialog, DialogContent, DialogTitle, IconButton } from "@mui/material";
+import { IconButton } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import { FormDataEdit, FormEditTasks } from "../form/formEditTasks";
 import { dataPostTarefaByUser } from "../../../../services/tarefas/postTarefaByUserService";
@@ -6,6 +6,7 @@ import {
 	dataEditTarefaByUser,
 	PayloadEditTasks,
 } from "../../../../services/tarefas/editTarefaByUserService";
+import { ModalComposition } from "../../../../components/ModalComposition";
 
 interface Props {
 	openModal: boolean;
@@ -35,15 +36,15 @@ export const EditTarefa = ({
 	};
 
 	return (
-		<Dialog
-			maxWidth="lg"
+		<ModalComposition.Root
+			maxWidth="md"
 			open={openModal}
 			onClose={handleCloseModal}
-			aria-labelledby="customized-dialog-title"
 		>
-			<DialogTitle sx={{ m: 0, p: 2 }} id="customized-dialog-title">
-				Editar tarefa
-			</DialogTitle>
+			<ModalComposition.Header
+				title="Editar tarefa"
+				onClose={handleCloseModal}
+			/>
 			<IconButton
 				aria-label="close"
 				onClick={handleCloseModal}
@@ -56,9 +57,9 @@ export const EditTarefa = ({
 			>
 				<CloseIcon />
 			</IconButton>
-			<DialogContent dividers>
+			<ModalComposition.Body>
 				<FormEditTasks submit={submitEditTaskPut} task={task} />
-			</DialogContent>
-		</Dialog>
+			</ModalComposition.Body>
+		</ModalComposition.Root>
 	);
 };
