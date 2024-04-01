@@ -3,7 +3,7 @@ import { FormLoginST } from "./components/formLogin";
 import { PreLoader } from "../../components/preLoader";
 import { useHooks } from "../../hooks";
 import { useSubmit } from "./hooks/useSubmit";
-import ImageBackLogin from "../../assets/images/Project_69-06.jpg";
+import ImageBackLogin from "../../assets/images/Project_69-06.png";
 
 export const LoginST = () => {
 	const { goTo } = useHooks();

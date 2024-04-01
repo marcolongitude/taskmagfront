@@ -8,7 +8,7 @@ import { AppRoutes } from "./router";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
-import "./index.css";
+// import "./index.css";
 
 const queryClient = new QueryClient({
 	defaultOptions: {
