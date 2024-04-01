@@ -86,9 +86,17 @@ export const Layout = (props: LayoutProps) => {
 					</Stack>
 				</Toolbar>
 			</AppBar>
-			<Stack>
+			<Stack
+				flex={1}
+				justifyContent={"center"}
+				alignItems={"center"}
+				alignSelf={"center"}
+				width={"100%"}
+			>
 				<ErrorHandling />
-				<Box mt={12}>{props.children}</Box>
+				<Box width={"70%"} mt={8}>
+					{props.children}
+				</Box>
 			</Stack>
 		</Box>
 	);
