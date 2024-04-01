@@ -1,7 +1,6 @@
 import React from "react";
-import { DialogTitle, IconButton } from "@mui/material";
+import { DialogTitle, IconButton, Typography } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
-import { TypographyST } from "@solterra/components";
 
 interface PropsTypes {
 	children: React.ReactNode;
@@ -38,9 +37,9 @@ interface Props {
 export const ModalHeader = ({ onClose, title }: Props) => {
 	return (
 		<BootstrapDialogTitle onClose={onClose}>
-			<TypographyST variant="h6" gutterBottom>
+			<Typography color="secondary" variant="h6" gutterBottom>
 				{title}
-			</TypographyST>
+			</Typography>
 		</BootstrapDialogTitle>
 	);
 };

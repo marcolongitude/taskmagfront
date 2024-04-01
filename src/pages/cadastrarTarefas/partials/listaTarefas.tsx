@@ -47,7 +47,7 @@ export const ListaTarefas = ({ tarefas }: ListaTarefasProps) => {
 			<Box display={"flex"} justifyContent={"end"} width={"100%"} mb={4}>
 				<Button
 					onClick={handleOpenModal}
-					color="primary"
+					color="secondary"
 					variant="outlined"
 				>
 					Adicionar tarefa
@@ -60,7 +60,17 @@ export const ListaTarefas = ({ tarefas }: ListaTarefasProps) => {
 						<Box key={tarefa.idtasks}>
 							<Card>
 								<CardHeader
-									title={tarefa.title}
+									title={
+										<Typography
+											color={"secondary"}
+											gutterBottom
+											variant="h6"
+											component="span"
+										>
+											{tarefa.title}
+										</Typography>
+									}
+									color="secondary"
 									subheader={
 										<Typography
 											color="text.secondary"
