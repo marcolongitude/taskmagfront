@@ -37,9 +37,15 @@ interface Props {
 export const ModalHeader = ({ onClose, title }: Props) => {
 	return (
 		<BootstrapDialogTitle onClose={onClose}>
+<<<<<<< HEAD
 			<Typography color="secondary" variant="h6" gutterBottom>
 				{title}
 			</Typography>
+=======
+			<TypographyST variant="h6" gutterBottom>
+				{title}
+			</TypographyST>
+>>>>>>> d2b4a24 (:styles correçao cor titulo)
 		</BootstrapDialogTitle>
 	);
 };
