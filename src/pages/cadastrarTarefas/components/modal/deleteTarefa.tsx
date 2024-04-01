@@ -29,17 +29,21 @@ export const DeleteTarefa = ({
 	return (
 		<ModalComposition.Root open={openModal} onClose={closeModal}>
 			<ModalComposition.Header
-				title="Deletar tarefa"
+				title="Excluir tarefa"
 				onClose={closeModal}
 			/>
 			<ModalComposition.Body>
 				<Stack>
-					<Alert severity="warning" title="Zona de perigo">
+					<Alert
+						severity="warning"
+						variant="outlined"
+						title="Zona de perigo"
+					>
 						<AlertTitle>Zona de perigo!</AlertTitle>
 						<Box>
 							<Typography
 								variant="body2"
-								color="primary"
+								color="secondary"
 								component="p"
 							>
 								Deseja realmente excluir a tarefa?
@@ -53,7 +57,7 @@ export const DeleteTarefa = ({
 					<Button
 						fullWidth
 						color="error"
-						variant="contained"
+						variant="text"
 						endIcon={<DeleteIcon />}
 						onClick={() =>
 							task.idtasks &&
