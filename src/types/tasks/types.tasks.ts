@@ -46,4 +46,5 @@ export type IResponsePostTarefasByUser = {
 		date: string;
 		status: "concluido" | "pendente";
 	};
+	statusCode: number;
 };
