@@ -10,7 +10,10 @@ import {
 	Switch,
 	Typography,
 } from "@mui/material";
-import { IResponseGetTarefasByUser } from "../../../types/tasks/types.tasks";
+import {
+	IResponseGetTarefasByUser,
+	ITarefa,
+} from "../../../types/tasks/types.tasks";
 import { useHooks } from "../../../hooks";
 import { useEditTarefasByUser } from "../hooks/editTarefasByUser";
 
@@ -42,16 +45,10 @@ export const ListaTarefas = ({ tarefas }: ListaTarefasProps) => {
 	} = useHandleFunctions();
 
 	const [checkedTasks, setCheckedTasks] = useState<Record<string, boolean>>(
-		tarefas.data.reduce(
-			(
-				acc: Record<string, boolean>,
-				tarefa: IResponseGetTarefasByUser["data"][0]
-			) => {
-				acc[tarefa.idtasks] = tarefa.status === "concluido";
-				return acc;
-			},
-			{}
-		)
+		tarefas.data.reduce((acc: Record<string, boolean>, tarefa: ITarefa) => {
+			acc[tarefa.idtasks] = tarefa.status === "concluido";
+			return acc;
+		}, {})
 	);
 
 	const handleChange = (
