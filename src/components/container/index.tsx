@@ -26,7 +26,7 @@ export const Container = ({ title, children }: Props) => {
 					const isLast = index === pathnames.length - 1;
 
 					return isLast ? (
-						<Typography color="secondary" key={routeTo}>
+						<Typography color="text.secondary" key={routeTo}>
 							{name}
 						</Typography>
 					) : (
@@ -37,7 +37,7 @@ export const Container = ({ title, children }: Props) => {
 				})}
 			</Breadcrumbs>
 			<Box marginTop={2} marginBottom={5}>
-				<Typography variant="h4" noWrap color="secondary">
+				<Typography variant="h4" noWrap color="text.primary">
 					{title}
 				</Typography>
 			</Box>

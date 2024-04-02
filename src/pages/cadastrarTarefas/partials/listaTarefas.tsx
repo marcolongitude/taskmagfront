@@ -7,6 +7,7 @@ import {
 	CardHeader,
 	Chip,
 	Stack,
+	Switch,
 	Typography,
 } from "@mui/material";
 import { IResponseGetTarefasByUser } from "../../../types/tasks/types.tasks";
@@ -18,6 +19,7 @@ import { useHandleFunctions } from "../hooks/functions/handleFunctions";
 import { AddTarefa } from "../components/modal/addTarefa";
 import { EditTarefa } from "../components/modal/editTarefa";
 import { DeleteTarefa } from "../components/modal/deleteTarefa";
+import { useState } from "react";
 
 interface ListaTarefasProps {
 	tarefas: IResponseGetTarefasByUser;
@@ -39,6 +41,29 @@ export const ListaTarefas = ({ tarefas }: ListaTarefasProps) => {
 		openModalDelete,
 	} = useHandleFunctions();
 
+	const [checkedTasks, setCheckedTasks] = useState<Record<string, boolean>>(
+		tarefas.data.reduce(
+			(
+				acc: Record<string, boolean>,
+				tarefa: IResponseGetTarefasByUser["data"][0]
+			) => {
+				acc[tarefa.idtasks] = tarefa.status === "concluido";
+				return acc;
+			},
+			{}
+		)
+	);
+
+	const handleChange = (
+		event: React.ChangeEvent<HTMLInputElement>,
+		taskId: string
+	) => {
+		setCheckedTasks({
+			...checkedTasks,
+			[taskId]: event.target.checked,
+		});
+	};
+
 	const { submitEditTask } = useEditTarefasByUser(handleCloseModalEdit);
 	const { submitDeleteTask } = useDeleteTarefasByUser(handleCloseModalDelete);
 
@@ -47,7 +72,7 @@ export const ListaTarefas = ({ tarefas }: ListaTarefasProps) => {
 			<Box display={"flex"} justifyContent={"end"} width={"100%"} mb={4}>
 				<Button
 					onClick={handleOpenModal}
-					color="secondary"
+					color="success"
 					variant="outlined"
 				>
 					Adicionar tarefa
@@ -58,18 +83,30 @@ export const ListaTarefas = ({ tarefas }: ListaTarefasProps) => {
 					tarefas.data &&
 					tarefas.data.map((tarefa) => (
 						<Box key={tarefa.idtasks}>
-							<Card>
+							<Card
+								sx={{
+									padding: "8px",
+								}}
+							>
+								<Stack
+									width={"100%"}
+									direction={"row"}
+									justifyContent={"end"}
+								>
+									<Switch
+										checked={checkedTasks[tarefa.idtasks]}
+										onChange={(event) =>
+											handleChange(event, tarefa.idtasks)
+										}
+										inputProps={{
+											"aria-label": "controlled",
+										}}
+										color="secondary"
+										size="small"
+									/>
+								</Stack>
 								<CardHeader
-									title={
-										<Typography
-											color={"secondary"}
-											gutterBottom
-											variant="h6"
-											component="span"
-										>
-											{tarefa.title}
-										</Typography>
-									}
+									title={tarefa.title}
 									color="secondary"
 									subheader={
 										<Typography
