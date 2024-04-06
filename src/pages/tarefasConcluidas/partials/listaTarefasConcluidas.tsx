@@ -42,7 +42,7 @@ export const ListaTarefasConcluidas = ({ tarefas }: ListaTarefasProps) => {
 					tarefas.data &&
 					tarefas.data.map((tarefa) => (
 						<Box key={tarefa.idtasks}>
-							{tarefa.status === "pendente" && (
+							{tarefa.status === "concluido" && (
 								<Card
 									sx={{
 										padding: "8px",
