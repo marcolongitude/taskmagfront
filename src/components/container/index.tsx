@@ -26,15 +26,7 @@ export const Container = ({ title, children }: Props) => {
 					const isLast = index === pathnames.length - 1;
 
 					return isLast ? (
-<<<<<<< HEAD
 						<Typography color="text.secondary" key={routeTo}>
-=======
-<<<<<<< HEAD
-						<Typography color="text.secondary" key={routeTo}>
-=======
-						<Typography color="secondary" key={routeTo}>
->>>>>>> main
->>>>>>> branch 'main' of git@github.com:marcolongitude/taskmagfront.git
 							{name}
 						</Typography>
 					) : (
@@ -45,15 +37,7 @@ export const Container = ({ title, children }: Props) => {
 				})}
 			</Breadcrumbs>
 			<Box marginTop={2} marginBottom={5}>
-<<<<<<< HEAD
 				<Typography variant="h4" noWrap color="text.primary">
-=======
-<<<<<<< HEAD
-				<Typography variant="h4" noWrap color="text.primary">
-=======
-				<Typography variant="h4" noWrap color="secondary">
->>>>>>> main
->>>>>>> branch 'main' of git@github.com:marcolongitude/taskmagfront.git
 					{title}
 				</Typography>
 			</Box>
