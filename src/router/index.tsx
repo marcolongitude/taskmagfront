@@ -4,6 +4,7 @@ import { PrivateRoute } from "../router/PrivateRoute";
 import { RouteMenu } from "./interface";
 import ControlPointDuplicateOutlinedIcon from "@mui/icons-material/ControlPointDuplicateOutlined";
 import { ListagemTarefas } from "../pages/tarefas";
+import { ListagemTarefasConcluidas } from "../pages/tarefasConcluidas";
 import { useHooks } from "../hooks";
 
 export const AppRoutes = () => {
@@ -12,9 +13,14 @@ export const AppRoutes = () => {
 			text: "Tarefas",
 			menu: [
 				{
-					text: "Lista de tarefas",
+					text: "Tarefas pendentes",
 					icon: <ControlPointDuplicateOutlinedIcon />,
 					navigate: "/dashboard/tarefas",
+				},
+				{
+					text: "Tarefas concluídas",
+					icon: <ControlPointDuplicateOutlinedIcon />,
+					navigate: "/dashboard/tarefasconcluidas",
 				},
 			],
 		},
@@ -29,6 +35,15 @@ export const AppRoutes = () => {
 				element={<PrivateRoute token={token} menu={menu} />}
 			>
 				<Route path="tarefas" element={<ListagemTarefas />} />
+			</Route>
+			<Route
+				path="dashboard"
+				element={<PrivateRoute token={token} menu={menu} />}
+			>
+				<Route
+					path="tarefasconcluidas"
+					element={<ListagemTarefasConcluidas />}
+				/>
 			</Route>
 			<Route path="/" element={<LoginST />} />
 		</Routes>
