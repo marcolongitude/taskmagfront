@@ -50,6 +50,7 @@ export const ListaTarefas = ({ tarefas }: ListaTarefasProps) => {
 			<Box display={"flex"} justifyContent={"end"} width={"100%"} mb={4}>
 				<Button
 					onClick={handleOpenModal}
+<<<<<<< HEAD
 					color="success"
 					variant="outlined"
 				>
@@ -109,6 +110,141 @@ export const ListaTarefas = ({ tarefas }: ListaTarefasProps) => {
 										<Typography
 											variant="body1"
 											component="p"
+=======
+<<<<<<< HEAD:src/pages/tarefas/partials/listaTarefas.tsx
+					color="success"
+=======
+					color="secondary"
+>>>>>>> main:src/pages/cadastrarTarefas/partials/listaTarefas.tsx
+					variant="outlined"
+				>
+					Adicionar tarefa
+				</Button>
+			</Box>
+			<Stack gap={2} direction={"column"}>
+				{tarefas.data &&
+					tarefas.data &&
+					tarefas.data.map((tarefa) => (
+						<Box key={tarefa.idtasks}>
+<<<<<<< HEAD:src/pages/tarefas/partials/listaTarefas.tsx
+							{tarefa.status === "pendente" && (
+								<Card
+									sx={{
+										padding: "8px",
+									}}
+								>
+									<Stack
+										width={"100%"}
+										direction={"row"}
+										justifyContent={"end"}
+									>
+										<Switch
+											checked={
+												checkedTasks[tarefa.idtasks]
+											}
+											onChange={(event) =>
+												handleChangeStatusTasks(
+													event,
+													tarefa.idtasks
+												)
+											}
+											inputProps={{
+												"aria-label": "controlled",
+											}}
+											color="secondary"
+=======
+							<Card>
+								<CardHeader
+									title={
+										<Typography
+											color={"secondary"}
+											gutterBottom
+											variant="h6"
+											component="span"
+										>
+											{tarefa.title}
+										</Typography>
+									}
+									color="secondary"
+									subheader={
+										<Typography
+											color="text.secondary"
+											sx={{
+												marginLeft: 2,
+												marginTop: "2px",
+											}}
+										>
+											Data:{" "}
+											{tarefa.date || "não informado"}
+										</Typography>
+									}
+								/>
+								<CardContent>
+									<Typography variant="body1" component="p">
+										{tarefa.description}
+									</Typography>
+									<Stack
+										width={"100%"}
+										flexDirection={"row"}
+										justifyContent={"start"}
+										mt={8}
+										gap={1}
+									>
+										<Chip
+											color="success"
+											component={"span"}
+											label={`Tempo: ${tarefa.time}`}
+>>>>>>> main:src/pages/cadastrarTarefas/partials/listaTarefas.tsx
+											size="small"
+										/>
+<<<<<<< HEAD:src/pages/tarefas/partials/listaTarefas.tsx
+									</Stack>
+									<CardHeader
+										title={tarefa.title}
+										color="secondary"
+										subheader={
+											<Typography
+												color="text.secondary"
+												sx={{
+													marginLeft: 2,
+													marginTop: "2px",
+												}}
+											>
+												Data:{" "}
+												{tarefa.date || "não informado"}
+											</Typography>
+										}
+									/>
+									<CardContent>
+										<Typography
+											variant="body1"
+											component="p"
+=======
+										<Chip
+											color="info"
+											component={"span"}
+											label={`Status: ${tarefa.status}`}
+											size="small"
+											variant="outlined"
+										/>
+									</Stack>
+								</CardContent>
+								<CardActions>
+									<Box
+										width={"100%"}
+										display={"flex"}
+										justifyContent={"end"}
+										gap={2}
+									>
+										<Button
+											size="small"
+											onClick={() =>
+												handleOpenModalEdit(tarefa)
+											}
+											color="primary"
+											variant="outlined"
+>>>>>>> main:src/pages/cadastrarTarefas/partials/listaTarefas.tsx
+>>>>>>> branch 'main' of git@github.com:marcolongitude/taskmagfront.git
 										>
 											{tarefa.description}
 										</Typography>
