@@ -7,6 +7,7 @@ import {
 	CardHeader,
 	Chip,
 	Stack,
+	Switch,
 	Typography,
 } from "@mui/material";
 import { IResponseGetTarefasByUser } from "../../../types/tasks/types.tasks";
@@ -37,7 +38,9 @@ export const ListaTarefas = ({ tarefas }: ListaTarefasProps) => {
 		handleOpenModalDelete,
 		handleCloseModalDelete,
 		openModalDelete,
-	} = useHandleFunctions();
+		handleChangeStatusTasks,
+		checkedTasks,
+	} = useHandleFunctions({ tarefas });
 
 	const { submitEditTask } = useEditTarefasByUser(handleCloseModalEdit);
 	const { submitDeleteTask } = useDeleteTarefasByUser(handleCloseModalDelete);
@@ -47,7 +50,11 @@ export const ListaTarefas = ({ tarefas }: ListaTarefasProps) => {
 			<Box display={"flex"} justifyContent={"end"} width={"100%"} mb={4}>
 				<Button
 					onClick={handleOpenModal}
+<<<<<<< HEAD:src/pages/tarefas/partials/listaTarefas.tsx
+					color="success"
+=======
 					color="secondary"
+>>>>>>> main:src/pages/cadastrarTarefas/partials/listaTarefas.tsx
 					variant="outlined"
 				>
 					Adicionar tarefa
@@ -58,6 +65,33 @@ export const ListaTarefas = ({ tarefas }: ListaTarefasProps) => {
 					tarefas.data &&
 					tarefas.data.map((tarefa) => (
 						<Box key={tarefa.idtasks}>
+<<<<<<< HEAD:src/pages/tarefas/partials/listaTarefas.tsx
+							{tarefa.status === "pendente" && (
+								<Card
+									sx={{
+										padding: "8px",
+									}}
+								>
+									<Stack
+										width={"100%"}
+										direction={"row"}
+										justifyContent={"end"}
+									>
+										<Switch
+											checked={
+												checkedTasks[tarefa.idtasks]
+											}
+											onChange={(event) =>
+												handleChangeStatusTasks(
+													event,
+													tarefa.idtasks
+												)
+											}
+											inputProps={{
+												"aria-label": "controlled",
+											}}
+											color="secondary"
+=======
 							<Card>
 								<CardHeader
 									title={
@@ -99,9 +133,32 @@ export const ListaTarefas = ({ tarefas }: ListaTarefasProps) => {
 											color="success"
 											component={"span"}
 											label={`Tempo: ${tarefa.time}`}
+>>>>>>> main:src/pages/cadastrarTarefas/partials/listaTarefas.tsx
 											size="small"
-											variant="outlined"
 										/>
+<<<<<<< HEAD:src/pages/tarefas/partials/listaTarefas.tsx
+									</Stack>
+									<CardHeader
+										title={tarefa.title}
+										color="secondary"
+										subheader={
+											<Typography
+												color="text.secondary"
+												sx={{
+													marginLeft: 2,
+													marginTop: "2px",
+												}}
+											>
+												Data:{" "}
+												{tarefa.date || "não informado"}
+											</Typography>
+										}
+									/>
+									<CardContent>
+										<Typography
+											variant="body1"
+											component="p"
+=======
 										<Chip
 											color="info"
 											component={"span"}
@@ -125,22 +182,66 @@ export const ListaTarefas = ({ tarefas }: ListaTarefasProps) => {
 											}
 											color="primary"
 											variant="outlined"
+>>>>>>> main:src/pages/cadastrarTarefas/partials/listaTarefas.tsx
 										>
-											Editar tarefa
-										</Button>
-										<Button
-											size="small"
-											onClick={() =>
-												handleOpenModalDelete(tarefa)
-											}
-											color="error"
-											variant="outlined"
+											{tarefa.description}
+										</Typography>
+										<Stack
+											width={"100%"}
+											flexDirection={"row"}
+											justifyContent={"start"}
+											mt={8}
+											gap={1}
 										>
-											Deletar tarefa
-										</Button>
-									</Box>
-								</CardActions>
-							</Card>
+											<Chip
+												color="success"
+												component={"span"}
+												label={`Tempo: ${tarefa.time}`}
+												size="small"
+												variant="outlined"
+											/>
+											<Chip
+												color="info"
+												component={"span"}
+												label={`Status: ${tarefa.status}`}
+												size="small"
+												variant="outlined"
+											/>
+										</Stack>
+									</CardContent>
+									<CardActions>
+										<Box
+											width={"100%"}
+											display={"flex"}
+											justifyContent={"end"}
+											gap={2}
+										>
+											<Button
+												size="small"
+												onClick={() =>
+													handleOpenModalEdit(tarefa)
+												}
+												color="primary"
+												variant="outlined"
+											>
+												Editar tarefa
+											</Button>
+											<Button
+												size="small"
+												onClick={() =>
+													handleOpenModalDelete(
+														tarefa
+													)
+												}
+												color="error"
+												variant="outlined"
+											>
+												Deletar tarefa
+											</Button>
+										</Box>
+									</CardActions>
+								</Card>
+							)}
 						</Box>
 					))}
 				{tarefas.data.length === 0 && (

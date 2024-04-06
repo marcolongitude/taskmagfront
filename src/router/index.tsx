@@ -3,7 +3,7 @@ import { LoginST } from "../pages/login/";
 import { PrivateRoute } from "../router/PrivateRoute";
 import { RouteMenu } from "./interface";
 import ControlPointDuplicateOutlinedIcon from "@mui/icons-material/ControlPointDuplicateOutlined";
-import { ListagemTarefas } from "../pages/cadastrarTarefas";
+import { ListagemTarefas } from "../pages/tarefas";
 import { useHooks } from "../hooks";
 
 export const AppRoutes = () => {

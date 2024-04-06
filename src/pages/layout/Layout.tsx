@@ -49,13 +49,15 @@ export const Layout = (props: LayoutProps) => {
 						<Box>
 							{props.menu.map((category) => (
 								<Box
+									key={category.text}
 									sx={{
 										display: { xs: "none", sm: "block" },
 									}}
 								>
-									{category.menu.map((menu) => (
+									{category.menu.map((menu, index) => (
 										<>
 											<Button
+												key={index}
 												onClick={() =>
 													goTo(menu.navigate || "")
 												}
