@@ -56,16 +56,20 @@ export const useHandleFunctions = ({ tarefas }: IProps) => {
 		event: React.ChangeEvent<HTMLInputElement>,
 		taskId: string
 	) => {
-		setCheckedTasks({
-			...checkedTasks,
+		// Criando um novo objeto com a tarefa atual marcada/desmarcada
+		const updatedCheckedTasks = {
 			[taskId]: event.target.checked,
-		});
+		};
 
-		const payload = Object.keys(checkedTasks).map((key) => {
-			return {
-				[key]: checkedTasks[key],
-			};
-		});
+		setCheckedTasks(updatedCheckedTasks);
+
+		// Criando o payload apenas com a tarefa atual
+		const payload = [
+			{
+				[taskId]: updatedCheckedTasks[taskId],
+			},
+		];
+
 		submitUpdateTaskStatus({ data: payload, token });
 	};
 
