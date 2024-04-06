@@ -1,21 +1,19 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { dataPostTarefaByUser } from "../../../../services/tarefas/postTarefaByUserService";
 import {
 	IResponseGetTarefasByUser,
 	ITarefa,
 } from "../../../../types/tasks/types.tasks";
-import { useUpdateTarefasStatus } from "../updateTArefasStatus";
 import { useHooks } from "../../../../hooks";
+import { useUpdateTarefasStatus } from "../updateTArefasStatus";
 
 interface IProps {
 	tarefas: IResponseGetTarefasByUser;
 }
 
-export const useHandleFunctions = ({ tarefas }: IProps) => {
+export const useHandleFunctionsConcluidas = ({ tarefas }: IProps) => {
 	const { submitUpdateTaskStatus } = useUpdateTarefasStatus();
 	const { token } = useHooks();
-	const [openModal, setOpenModal] = useState<boolean>(false);
-	const [openModalEdit, setOpenModalEdit] = useState<boolean>(false);
 	const [openModalDelete, setOpenModalDelete] = useState<boolean>(false);
 	const [taskSelected, setTaskSelected] = useState<dataPostTarefaByUser>(
 		{} as dataPostTarefaByUser
@@ -26,22 +24,6 @@ export const useHandleFunctions = ({ tarefas }: IProps) => {
 			return acc;
 		}, {})
 	);
-	const handleOpenModal = () => {
-		setOpenModal(true);
-	};
-
-	const handleCloseModal = () => {
-		setOpenModal(false);
-	};
-
-	const handleOpenModalEdit = (tarefa: dataPostTarefaByUser) => {
-		setTaskSelected(tarefa);
-		setOpenModalEdit(true);
-	};
-
-	const handleCloseModalEdit = () => {
-		setOpenModalEdit(false);
-	};
 
 	const handleOpenModalDelete = (tarefa: dataPostTarefaByUser) => {
 		setTaskSelected(tarefa);
@@ -51,6 +33,18 @@ export const useHandleFunctions = ({ tarefas }: IProps) => {
 	const handleCloseModalDelete = () => {
 		setOpenModalDelete(false);
 	};
+
+	useEffect(() => {
+		setCheckedTasks(
+			tarefas.data.reduce(
+				(acc: Record<string, boolean>, tarefa: ITarefa) => {
+					acc[tarefa.idtasks] = tarefa.status === "concluido";
+					return acc;
+				},
+				{}
+			)
+		);
+	}, [tarefas]);
 
 	const handleChangeStatusTasks = (
 		event: React.ChangeEvent<HTMLInputElement>,
@@ -74,12 +68,6 @@ export const useHandleFunctions = ({ tarefas }: IProps) => {
 	};
 
 	return {
-		openModal,
-		handleOpenModal,
-		handleCloseModal,
-		openModalEdit,
-		handleOpenModalEdit,
-		handleCloseModalEdit,
 		taskSelected,
 		setTaskSelected,
 		handleOpenModalDelete,

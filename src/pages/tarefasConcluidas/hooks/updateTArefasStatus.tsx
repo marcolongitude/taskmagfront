@@ -11,15 +11,20 @@ export interface Form {
 
 export const useUpdateTarefasStatus = () => {
 	const queryClient = useQueryClient();
-	const response = useMutation(["tasksByUser"], UpdateTarefaStatusService, {
-		onSuccess: async (data) => {
-			queryClient.invalidateQueries(["tasksByUser"]);
-			return data;
-		},
-		onError: (error: AxiosError) => {
-			return Promise.reject(error);
-		},
-	});
+	const response = useMutation(
+		["tasksByUserStatusConcluido"],
+		UpdateTarefaStatusService,
+		{
+			onSuccess: async (data) => {
+				queryClient.invalidateQueries(["tasksByUserStatusConcluido"]);
+				queryClient.invalidateQueries(["tasksByUserStatusPendente"]);
+				return data;
+			},
+			onError: (error: AxiosError) => {
+				return Promise.reject(error);
+			},
+		}
+	);
 
 	return {
 		submitUpdateTaskStatus: response.mutate,

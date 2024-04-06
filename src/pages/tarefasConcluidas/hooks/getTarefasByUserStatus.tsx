@@ -11,7 +11,7 @@ export const useGetTarefasByUserStatus = ({
 	const { token, userData } = useHooks();
 
 	const { data, isLoading } = useQuery<IResponseGetTarefasByUser | undefined>(
-		"tasksByUserStatusPendente",
+		"tasksByUserStatusConcluido",
 		() =>
 			GetTarefasByUserStatusService({
 				token,

@@ -10,16 +10,20 @@ export interface Form {
 
 export const usePostTarefasByUser = (onClose: () => void) => {
 	const queryClient = useQueryClient();
-	const response = useMutation(["tasksByUser"], PostTarefaByUserService, {
-		onSuccess: async (data) => {
-			onClose();
-			queryClient.invalidateQueries(["tasksByUser"]);
-			return data;
-		},
-		onError: (error: AxiosError) => {
-			return Promise.reject(error);
-		},
-	});
+	const response = useMutation(
+		["tasksByUserStatusPendente"],
+		PostTarefaByUserService,
+		{
+			onSuccess: async (data) => {
+				onClose();
+				queryClient.invalidateQueries(["tasksByUserStatusPendente"]);
+				return data;
+			},
+			onError: (error: AxiosError) => {
+				return Promise.reject(error);
+			},
+		}
+	);
 
 	return {
 		submitAddTask: response.mutate,

@@ -14,16 +14,20 @@ export interface Form {
 
 export const useEditTarefasByUser = (onClose: () => void) => {
 	const queryClient = useQueryClient();
-	const response = useMutation(["tasksByUser"], EditTarefaByUserService, {
-		onSuccess: async (data: IResponseEditTarefasByUser) => {
-			onClose();
-			queryClient.invalidateQueries(["tasksByUser"]);
-			return data;
-		},
-		onError: (error: AxiosError) => {
-			return Promise.reject(error);
-		},
-	});
+	const response = useMutation(
+		["tasksByUserStatusPendente"],
+		EditTarefaByUserService,
+		{
+			onSuccess: async (data: IResponseEditTarefasByUser) => {
+				onClose();
+				queryClient.invalidateQueries(["tasksByUserStatusPendente"]);
+				return data;
+			},
+			onError: (error: AxiosError) => {
+				return Promise.reject(error);
+			},
+		}
+	);
 
 	return {
 		submitEditTask: response.mutate,
